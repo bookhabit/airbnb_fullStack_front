@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import {Link, Navigate, useLocation} from "react-router-dom";
 import { UserContext } from "../UserContext";
 import axios from "axios";
+import PlacesPage from "./PlacesPage";
 
 export default function AccountNav() {
     const {ready,user,setUser} = useContext(UserContext)
@@ -42,7 +43,7 @@ export default function AccountNav() {
     if (redirect) {
         return <Navigate to={redirect} />
     }
-    
+
     return (
         <div>
         <nav className="w-full flex justify-center mt-8 gap-2 mb-8">
@@ -70,6 +71,9 @@ export default function AccountNav() {
             Logged in as {user.name} ({user.email})<br />
             <button onClick={logout} className="primary max-w-sm mt-2">Logout</button>
             </div>
+        )}
+        {subpage==='places'&&(
+            <PlacesPage/>
         )}
         </div>
   );

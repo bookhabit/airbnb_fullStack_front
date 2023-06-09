@@ -20,7 +20,6 @@ export default function LoginPage() {
       alert('login failed')
     }
   }
-  console.log(user)
 
   if(redirect){
     return <Navigate to="/"/>
