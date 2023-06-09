@@ -7,11 +7,27 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
 
+  const handleLogin = async (event)=>{
+    event.preventDefault();
+    try{
+      const response  = await axios.post('/login',{email,password})
+      console.log(response)
+      alert('login successful')
+      setRedirect(true)
+    }catch(e){
+      alert('login failed')
+    }
+  }
+
+  if(redirect){
+    return <Navigate to="/"/>
+  }
+
   return (
     <div className="mt-4 grow flex items-center justify-around">
       <div className="mb-64">
         <h1 className="text-4xl text-center mb-4">Login</h1>
-        <form className="max-w-md mx-auto">
+        <form className="max-w-md mx-auto" onSubmit={handleLogin}>
           <input type="email"
                  placeholder="your@email.com"
                  value={email}

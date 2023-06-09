@@ -1,4 +1,4 @@
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
 import axios from "axios";
 
@@ -17,9 +17,15 @@ export default function ReigsterPage() {
         password:password
       })
       alert('register successful.')
+      setRedirect(true)
     }catch(e){
       alert('register failed')
     }
+  }
+
+  if(redirect){
+    const router = useNavigate();
+    router('/')
   }
 
   return (
