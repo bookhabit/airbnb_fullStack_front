@@ -55,7 +55,7 @@ export default function PlacesFormPage() {
     );
   }
 
-  // 숙소 등록하기
+  // 숙소 등록 및 수정
   async function savePlace(ev) {
     ev.preventDefault();
     const placeData = {
@@ -63,6 +63,7 @@ export default function PlacesFormPage() {
       description, perks, extraInfo,
       checkIn, checkOut, maxGuests, price,
     };
+    console.log(placeData);
     if (id) {
       // update
       await axios.put('/places', {
@@ -72,7 +73,7 @@ export default function PlacesFormPage() {
     } else {
       // new place
       await axios.post('/places', placeData);
-      setRedirect(true);
+      // setRedirect(true);
     }
 
   }
@@ -87,13 +88,16 @@ export default function PlacesFormPage() {
       <AccountNav />
       <form onSubmit={savePlace}>
         {preInput('Title', 'Title for your place. should be short and catchy as in advertisement')}
-        <input type="text" value={title} onChange={ev => setTitle(ev.target.value)} placeholder="title, for example: My lovely apt"/>
+        <input 
+          type="text" value={title} onChange={ev => setTitle(ev.target.value)} placeholder="title, for example: My lovely apt"/>
         {preInput('Address', 'Address to this place')}
-        <input type="text" value={address} onChange={ev => setAddress(ev.target.value)}placeholder="address"/>
+        <input 
+          type="text" value={address} onChange={ev => setAddress(ev.target.value)}placeholder="address"/>
         {preInput('Photos','more = better')}
         <PhotosUploader addedPhotos={addedPhotos} onChange={setAddedPhotos} />
         {preInput('Description','description of the place')}
-        <textarea value={description} onChange={ev => setDescription(ev.target.value)} />
+        <textarea 
+          value={description} onChange={ev => setDescription(ev.target.value)} />
         {preInput('Perks','select all the perks of your place')}
         <div className="grid mt-2 gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           <Perks selected={perks} onChange={setPerks} />
