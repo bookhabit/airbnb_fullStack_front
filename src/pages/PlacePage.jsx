@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import BookingWidget from "../BookingWidget";
 import PlaceGallery from "../PlaceGallery";
+import AddressLink from "../AddressLink";
 
 export default function PlacePage() {
   const {id} = useParams();
@@ -24,7 +25,7 @@ export default function PlacePage() {
   return (
     <div className="mt-4 bg-gray-100 -mx-8 px-8 py-8">
       <h1 className="text-3xl">{place.title}</h1>
-      <a className="block font-semibold underline my-2" target="_blank" href={`https://maps.google.com/?q=${place.address}`}>{place.address}</a>
+      <AddressLink>{place.address}</AddressLink>
       <PlaceGallery place={place} />
       <div className="mt-8 mb-8 grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr]">
         <div>
